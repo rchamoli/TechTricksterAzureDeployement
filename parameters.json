@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "automationAccountName": {
+      "value": "myAutomationAccount"
+    },
+    "hybridWorkerGroupName": {
+      "value": "DefaultWorkerGroup"
+    },
+    "vmName": {
+      "value": "myExistingVM"
+    },
+    "vmResourceGroup": {
+      "value": "myVMResourceGroup"
+    },
+    "location": {
+      "value": "East US"
+    },
+    "runbook1Name": {
+      "value": "HelloWorldRunbook"
+    },
+    "runbook2Name": {
+      "value": "DiskSpaceRunbook"
+    },
+    "runbook1Content": {
+      "value": "param([string]$Name = \"World\")\nWrite-Output \"Hello, $Name!\"\nWrite-Output \"Current time: $(Get-Date)\"\nWrite-Output \"Running on: $env:COMPUTERNAME\""
+    },
+    "runbook2Content": {
+      "value": "param([string]$Path = \"C:\\\")\nWrite-Output \"Getting disk space information for: $Path\"\n$diskInfo = Get-WmiObject -Class Win32_LogicalDisk | Where-Object {$_.DeviceID -eq $Path.Substring(0,2)}\nif ($diskInfo) {\n    Write-Output \"Drive: $($diskInfo.DeviceID)\"\n    Write-Output \"Total Space: $([math]::Round($diskInfo.Size/1GB, 2)) GB\"\n    Write-Output \"Free Space: $([math]::Round($diskInfo.FreeSpace/1GB, 2)) GB\"\n    Write-Output \"Used Space: $([math]::Round(($diskInfo.Size - $diskInfo.FreeSpace)/1GB, 2)) GB\"\n} else {\n    Write-Output \"Could not retrieve disk information for $Path\"\n}"
+    }
+  }
+}
