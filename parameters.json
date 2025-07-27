@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "automationAccountName": {
+      "value": "myAutomationAccount"
+    },
+    "hybridWorkerGroupName": {
+      "value": "DefaultWorkerGroup"
+    },
+    "vmName": {
+      "value": "myExistingVM"
+    },
+    "vmResourceGroup": {
+      "value": "myVMResourceGroup"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "runbook1Name": {
+      "value": "SystemInfoRunbook"
+    },
+    "runbook2Name": {
+      "value": "ResourceInventoryRunbook"
+    }
+  }
+}
